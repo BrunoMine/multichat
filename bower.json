@@ -1,0 +1,16 @@
+{
+    "name": "multichat",
+    "description": "Adiciona funcionalidades ao chat",
+    "keywords": [
+        "multichat",
+        "chat",
+        "bate-papo"
+    ],
+    "homepage": "https://github.com/BrunoMine/multichat",
+    "screenshots": [
+        "https://raw.githubusercontent.com/BrunoMine/multichat/master/screenshot.png"
+    ],
+    "authors": [
+        "BrunoMine"
+    ]
+}
