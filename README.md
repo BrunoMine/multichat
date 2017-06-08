@@ -6,10 +6,11 @@
 [![Licença](https://img.shields.io/badge/Licença-LGPL_v3.0-blue.svg)](https://github.com/BrunoMine/multichat/blob/master/LICENSE)
 
 ## Descrição
-Adiciona funcionalidades ao chat
-* Prefixos para administradores e moderadores?
-* Grupo privado?
-* Ignorar jogadores no chat ?
+Adiciona funcionalidades ao bate-papo
+* Prefixos para administradores e moderadores
+* Definir conversas privadas
+* Desligar bate-papo
+* Sons para notificar falas e chamadas
 
 ## Recursos do projeto
 
