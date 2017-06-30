@@ -24,10 +24,7 @@ end
 if minetest.get_version().string and string.find(minetest.get_version().string, "0.4.15") then
 	minetest.log("error", "[MULTICHAT] Versao imcompativel (use 0.4.16 ou superior)")
 end
--- Versão do cliente
-if minetest.setting_get("strict_protocol_version_checking") ~= "true" then
-	minetest.log("error", "[MULTICHAT] Incompativel com clientes inferiores a 0.4.16 (defina strict_protocol_version_checking para evitar erros)")
-end
+
 
 
 -- Modpath
