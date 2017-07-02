@@ -32,11 +32,7 @@ local modpath = minetest.get_modpath("multichat")
 
 -- Carregar scripts
 notificar("Carregando...")
-dofile(modpath.."/lib/memor/init.lua")
-
--- Variavel temporaria de jogadores online
-multichat.online = memor.online()
-
+dofile(modpath.."/online.lua")
 dofile(modpath.."/chat.lua")
 dofile(modpath.."/menu.lua")
 dofile(modpath.."/msg.lua")
