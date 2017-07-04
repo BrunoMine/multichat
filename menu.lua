@@ -74,21 +74,25 @@ local acessar_menu_grupo = function(name)
 	local tb_online = minetest.get_connected_players()
 	multichat.online[name].tb_online = {}
 	local st_online = ""
-	for n,p in ipairs(tb_online) do
-		local np = p:get_player_name()
+	local i = 1
+	while i <= table.maxn(tb_online) do
+		local np = tb_online[i]:get_player_name()
+		
 		-- Remove o proprio nome da lista
 		if np == name then
-			table.remove(tb_online, n)
+			table.remove(tb_online, i)
 		-- Remove nomes que estao no grupo
 		elseif tb_grupo[np] then
-			table.remove(tb_online, n)
+			table.remove(tb_online, i)
+		-- Insere na lista
 		else
 			if st_online ~= "" then st_online = st_online .. "," end
 			st_online = st_online .. np
 			table.insert(multichat.online[name].tb_online, np)
+			i = i + 1
 		end
+		
 	end
-	
 	minetest.show_formspec(name, "multichat:menu_grupo", "size[8,6]"
 		..default.gui_bg
 		..default.gui_bg_img
@@ -110,6 +114,7 @@ local acessar_menu_grupo = function(name)
 end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
+	
 	if formname == "multichat:menu" then
 		
 		-- Botao de desativar bate-papo
@@ -138,8 +143,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		
 	elseif formname == "multichat:menu_grupo" then
 		
+		-- Limpa variaveis quando sair (evitar o uso delas no futuro)
+		if fields.quit then
+			multichat.online[player:get_player_name()].sl_tb_online = nil
+			multichat.online[player:get_player_name()].sl_tb_grupo = nil
 		-- Verifica seleções
-		if fields.online then
+		elseif fields.online then
 			multichat.online[player:get_player_name()].sl_tb_online = string.split(fields.online, ":")[2]
 		elseif fields.grupo then
 			multichat.online[player:get_player_name()].sl_tb_grupo = string.split(fields.grupo, ":")[2]
@@ -151,16 +160,21 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		
 		-- Adicionar jogador para conversar
 		elseif fields.adicionar then
-			-- Verifica se tem algum jogador na tabela
-			if table.maxn(multichat.online[player:get_player_name()].tb_online) == 0 then return end
-			
 			local name = player:get_player_name()
+			
+			-- Verifica se tem algum jogador na tabela
+			if table.maxn(multichat.online[name].tb_online) == 0 then return end
+			
+			-- Verifica se selecionou umjogador
+			if not tonumber(multichat.online[name].sl_tb_online) then return end
 			
 			-- Caso o grupo esteja vazio cria
 			if multichat.grupos[name] == nil then multichat.grupos[name] = {} end
 			
 			-- Adiciona jogador
-			multichat.grupos[name][multichat.online[name].tb_online[tonumber(multichat.online[name].sl_tb_online)]] = true
+			local sl = tonumber(multichat.online[name].sl_tb_online)
+			local grupo = multichat.online[name].tb_online[sl]
+			multichat.grupos[name][grupo] = true
 			
 			-- Atualiza menu do grupo
 			acessar_menu_grupo(name)
@@ -169,14 +183,18 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		
 		-- Remover jogador
 		elseif fields.remover then
-			
-			-- Verifica se tem algum jogador na tabela
-			if table.maxn(multichat.online[player:get_player_name()].tb_grupo) == 0 then return end
-			
 			local name = player:get_player_name()
 			
+			-- Verifica se tem algum jogador na tabela
+			if table.maxn(multichat.online[name].tb_grupo) == 0 then return end
+			
+			-- Verifica se selecionou umjogador
+			if not tonumber(multichat.online[name].sl_tb_grupo) then return end
+			
 			-- Remove jogador do grupo
-			multichat.grupos[name][multichat.online[name].tb_grupo[tonumber(multichat.online[name].sl_tb_grupo)]] = nil
+			local sl = tonumber(multichat.online[name].sl_tb_grupo)
+			local grupo = multichat.online[name].tb_grupo[sl]
+			multichat.grupos[name][multichat.online[name].tb_grupo[sl]] = nil
 			
 			-- Atualiza menu do grupo
 			acessar_menu_grupo(name)
