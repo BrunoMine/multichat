@@ -109,7 +109,7 @@ minetest.register_on_chat_message(function(name, msg)
 		end
 		
 		-- Envia a si mesmo tambem para aparecer no console
-		minetest.chat_send_player(name, "<"..multichat.prefixo(falante)..falante.."> "..msg)
+		minetest.chat_send_player(name, "<"..multichat.prefixo(falante)..name.."> "..msg)
 		som_avisar(name)
 	end
 	return true
@@ -123,11 +123,15 @@ minetest.register_globalstep(function(dtime)
 	timer = timer + dtime;
 	if timer >= 3600 then
 		-- Mantar apenas grupos de jogadores online
-		local ntb = {}
+		local onlines = {}
+		-- Mudar tabela
 		for _,player in ipairs(minetest.get_connected_players()) do
-			local name = player:get_player_name()
-			ntb[name] = multichat.grupos[name]
+			onlines[player:get_player_name()] = true
 		end
-		multichat.grupos = ntb
+		for name,i in pairs(multichat.grupos) do
+			if not onlines[name] then
+				multichat.grupos[name] = nil
+			end
+		end
 	end
 end)
