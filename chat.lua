@@ -109,7 +109,7 @@ minetest.register_on_chat_message(function(name, msg)
 		end
 		
 		-- Envia a si mesmo tambem para aparecer no console
-		minetest.chat_send_player(name, "<"..multichat.prefixo(falante)..name.."> "..msg)
+		minetest.chat_send_player(name, "<"..multichat.prefixo(name)..name.."> "..msg)
 		som_avisar(name)
 	end
 	return true
