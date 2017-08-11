@@ -205,9 +205,23 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
-
 -- Registrar em 'sfinv'
-if sfinv then
+if mymenu then
+	
+	-- Registrar metodo de tradução instantanea
+	mymenu.register_tr(SS)
+	
+	-- Registrar botao
+	mymenu.register_button("multichat:abrir_menu", "Bate-Papo")
+	
+	-- Receber botao do inventario
+	minetest.register_on_player_receive_fields(function(player, formname, fields)
+		if fields["multichat:abrir_menu"] then
+			multichat.acessar_menu(player:get_player_name())
+		end
+	end)
+	
+elseif sfinv then
 	sfinv.register_page("multichat:menu", {
 		title = "Bate-Papo",
 		get = function(self, player, context)
@@ -226,11 +240,13 @@ if sfinv then
 			]], true)
 		end
 	})
-end
 
--- Receber botao do inventario
-minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if fields["multichat:abrir_menu"] then
-		multichat.acessar_menu(player:get_player_name())
-	end
-end)
+
+	-- Receber botao do inventario
+	minetest.register_on_player_receive_fields(function(player, formname, fields)
+		if fields["multichat:abrir_menu"] then
+			multichat.acessar_menu(player:get_player_name())
+		end
+	end)
+	
+end
