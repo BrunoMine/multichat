@@ -68,7 +68,18 @@ local enviar_msg = function(name, msg, falante)
 	elseif status == "off" then
 		return
 	
-	-- Verifica se jogador está ouvindo apenas seu grupo
+	-- Verifica se o jogador está ouvindo apenas seu grupo de guilda
+	elseif status == "guilda" then
+		minetest.chat_send_player(name, "<"..multichat.prefixo(falante)..falante.."> "..msg)
+		
+		-- Evita avisar a si mesmo
+		if name ~= falante then 
+			som_avisar(name, msg)
+		else
+			som_avisar(name)
+		end
+		
+	-- Verifica se jogador está ouvindo apenas seu grupo privado
 	elseif status == "grupo" and multichat.grupos[name] then
 	
 		-- Verifica se falante está no grupo
@@ -99,8 +110,30 @@ minetest.register_on_chat_message(function(name, msg)
 	-- Verificar se está desativado
 	elseif status == "off" then
 		minetest.chat_send_player(name, "Bate-papo desativado")
-		
+	
 	-- Verifica se jogador está falando apenas com seu grupo
+	elseif status == "guilda" then
+		
+		-- Verifica se o recurso esta ativo
+		if multichat.guild == false then return true end
+		
+		-- Mod manipulus
+		if multichat.mod_guild == "manipulus" then
+			-- Guilda do ouvinte
+			local mg = manipulus.get_player_grupo(name)
+			-- Verifica se guilda ainda existe
+			if mg == nil or manipulus.existe_grupo(mg) == false then return true end
+			-- Envia a mensagem para todos os jogadores
+			for _,player in ipairs(minetest.get_connected_players()) do
+				local n = player:get_player_name()
+				if manipulus.get_player_grupo(n) == mg then
+					enviar_msg(n, msg, name)
+				end
+			end
+		
+		end
+	
+	-- Verifica se jogador está falando apenas com seu grupo privado
 	elseif status == "grupo" then
 		
 		-- Envia a mensagem para todos os jogadores do grupo

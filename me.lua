@@ -33,6 +33,27 @@ local enviar_msg = function(name, msg, falante)
 	elseif status == "off" then
 		return
 	
+	-- Verifica se está em grupo da guilda
+	elseif status == "guilda" then
+		
+		-- Verifica se o recurso esta ativo
+		if multichat.guild == false then return end
+		
+		-- Mod manipulus
+		if multichat.mod_guild == "manipulus" then
+			-- Guilda do ouvinte
+			local my_guild = manipulus.get_player_grupo(name)
+			-- Verifica se guilda ainda existe
+			if my_guild == nil or manipulus.existe_grupo(my_guild) == false then return end
+			-- Guilda do falante
+			local you_guild = manipulus.get_player_grupo(falante)
+			-- Verifica se guilda ainda existe
+			if you_guild == nil or manipulus.existe_grupo(you_guild) == false then return end
+			-- Envia mensagem
+			minetest.chat_send_player(name, "* "..falante.." "..msg)
+			som_avisar(name, msg)
+		end
+		
 	-- Verifica se jogador está ouvindo apenas seu grupo
 	elseif status == "grupo" and multichat.grupos[name] then
 	

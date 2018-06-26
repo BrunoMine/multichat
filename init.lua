@@ -25,7 +25,12 @@ if minetest.get_version().string and string.find(minetest.get_version().string, 
 	minetest.log("error", "[MULTICHAT] Versao imcompativel (use 0.4.16 ou superior)")
 end
 
-
+-- Verifica se tem mod de grupo/guilda
+multichat.guild = false
+if minetest.get_modpath("manipulus") then 
+	multichat.guild = true
+	multichat.mod_guild = "manipulus"
+end
 
 -- Modpath
 local modpath = minetest.get_modpath("multichat")

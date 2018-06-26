@@ -31,9 +31,13 @@ multichat.acessar_menu = function(name)
 	elseif st == "off" then
 		status = status .. minetest.colorize("#FF0000", "Desativado")
 	
-	-- Caso esteja no Grupo
+	-- Caso esteja no Grupo Privado
 	elseif st == "grupo" then
 		status = status .. minetest.colorize("#3366FF", "em Privado")
+	
+	-- Caso esteja no Grupo da Guilda
+	elseif st == "guilda" then
+		status = status .. minetest.colorize("#3366FF", "em Grupo")
 	
 	-- Caso nenhuma situação prevista
 	else
@@ -44,7 +48,14 @@ multichat.acessar_menu = function(name)
 	local st_som = player:get_attribute("multichat_som") or "true"
 	local st_chamada = player:get_attribute("multichat_chamada") or "true"
 	
-	minetest.show_formspec(name, "multichat:menu", "size[4,5]"
+	local formspec = ""
+	if multichat.guild == true then
+		formspec = formspec .. "size[4,6]"
+	else
+		formspec = formspec .. "size[4,5]"
+	end
+	
+	formspec = formspec
 		..default.gui_bg
 		..default.gui_bg_img
 		.."label[0,0;Meu Bate-Papo \n"..status.."]"
@@ -55,7 +66,13 @@ multichat.acessar_menu = function(name)
 		.."button_exit[0,2.2;4,1;desativar;Desativar]"
 		.."button_exit[0,3.2;4,1;publico;Publico]"
 		.."button_exit[0,4.2;3.3,1;privado;Privado]"
-		.."image_button[3.15,4.3;0.825,0.825;default_book_written.png;grupo;]")
+		.."image_button[3.15,4.3;0.825,0.825;default_book_written.png;grupo;]"
+	
+	-- Botão de grupo
+	if multichat.guild == true then
+		formspec = formspec .. "button_exit[0,5.2;4,1;guild;Guilda]"
+	end
+	minetest.show_formspec(name, "multichat:menu", formspec)
 end
 
 -- Acessar menu do grupo
@@ -121,18 +138,31 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		if fields.desativar then
 			player:set_attribute("multichat_status", "off")
 			minetest.chat_send_player(player:get_player_name(), "Bate-papo desativado")
-		
+			
 		elseif fields.publico then
 			player:set_attribute("multichat_status", "pub")
 			minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo publico")
-		
+			
 		elseif fields.privado then
 			player:set_attribute("multichat_status", "grupo")
 			minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo privado")
-		
+			
 		elseif fields.grupo then
 			acessar_menu_grupo(player:get_player_name())
-			
+		
+		-- Guilda	
+		elseif fields.guild then
+			-- Manipulus
+			if multichat.mod_guild == "manipulus" then
+				local grupo = manipulus.get_player_grupo(player:get_player_name())
+				if grupo == nil or manipulus.existe_grupo(grupo) == false then
+					minetest.chat_send_player(player:get_player_name(), "Precisa entrar em um grupo")
+				else
+					player:set_attribute("multichat_status", "guilda")
+					minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo do grupo '"..grupo.."'")
+				end
+			end
+		
 		-- Caixas de seleção (avisos sonoros)
 		elseif fields.som then 
 			player:set_attribute("multichat_som", fields.som)
