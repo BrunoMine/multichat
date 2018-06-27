@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-27 11:41-0300\n"
+"PO-Revision-Date: 2018-06-27 11:54-0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt\n"
+
+#: menu.lua
+msgid "Atualmente"
+msgstr "Atualmente"
+
+#: menu.lua
+msgid "em Publico"
+msgstr "em Publico"
+
+#: menu.lua
+msgid "Desativado"
+msgstr "Desativado"
+
+#: menu.lua
+msgid "em Privado"
+msgstr "em Privado"
+
+#: menu.lua
+msgid "em Grupo"
+msgstr "em Grupo"
+
+#: menu.lua
+msgid "Erro"
+msgstr "Erro"
+
+#: menu.lua
+msgid "Meu Bate-Papo"
+msgstr "Meu Bate-Papo"
+
+#: menu.lua
+msgid "Som"
+msgstr "Som"
+
+#: menu.lua
+msgid "Sair"
+msgstr "Sair"
+
+#: menu.lua
+msgid "Desativar"
+msgstr "Desativar"
+
+#: menu.lua
+msgid "Publico"
+msgstr "Publico"
+
+#: menu.lua
+msgid "Privado"
+msgstr "Privado"
+
+#: menu.lua
+msgid "Grupo"
+msgstr "Grupo"
+
+#: menu.lua
+msgid "Meu Bate-Papo Privado"
+msgstr "Meu Bate-Papo Privado"
+
+#: menu.lua
+msgid "Voltar"
+msgstr "Voltar"
+
+#: menu.lua
+msgid "Ignorados"
+msgstr "Ignorados"
+
+#: menu.lua
+msgid "Adicionar"
+msgstr "Adicionar"
+
+#: menu.lua
+msgid "Remover"
+msgstr "Remover"
+
+#: menu.lua
+msgid "Conversando"
+msgstr "Conversando"
+
+#: menu.lua
+msgid "Bate-papo desativado"
+msgstr "Bate-papo desativado"
+
+#: menu.lua
+msgid "Foste para o bate-papo publico"
+msgstr "Foste para o bate-papo publico"
+
+#: menu.lua
+msgid "Foste para o bate-papo privado"
+msgstr "Foste para o bate-papo privado"
+
+#: menu.lua
+msgid "Precisa entrar em um grupo"
+msgstr "Precisa entrar em um grupo"
+
+#: menu.lua
+msgid "Foste para o bate-papo do grupo @1"
+msgstr "Foste para o bate-papo do grupo @1"
+
+#: menu.lua
+msgid "Bate-Papo"
+msgstr "Bate-Papo"
+
+#: menu.lua
+msgid "Abrir Menu"
+msgstr "Abrir Menu"
+
+#: chat.lua
+msgid "Usar chat como administrador"
+msgstr "Usar chat como administrador"
+
+#: chat.lua
+msgid "Usar chat como moderador"
+msgstr "Usar chat como moderador"
+
+#: chat.lua
+msgid "ADMIN"
+msgstr "ADMIN"
+
+#: chat.lua
+msgid "MODERADOR"
+msgstr "MODERADOR"

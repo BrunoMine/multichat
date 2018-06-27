@@ -37,6 +37,7 @@ local modpath = minetest.get_modpath("multichat")
 
 -- Carregar scripts
 notificar("Carregando...")
+dofile(modpath.."/tradutor.lua")
 dofile(modpath.."/online.lua")
 dofile(modpath.."/chat.lua")
 dofile(modpath.."/menu.lua")

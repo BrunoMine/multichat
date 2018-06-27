@@ -10,6 +10,8 @@
 	
   ]]
 
+local S = multichat.S
+
 -- Remover grupo de um jogador offline
 local remover_grupo = function(name)
 	multichat.salas[name] = nil
@@ -21,27 +23,27 @@ multichat.acessar_menu = function(name)
 	local player = minetest.get_player_by_name(name)
 	local st = player:get_attribute("multichat_status")
 
-	local status = "Atualmente\n"
+	local status = S("Atualmente").."\n"
 	
 	-- Caso esteja no Publico
 	if st == nil or st == "pub" then
-		status = status .. minetest.colorize("#00FF00", "em Publico")
+		status = status .. minetest.colorize("#00FF00", S("em Publico"))
 	
 	-- Caso esteja Desativado
 	elseif st == "off" then
-		status = status .. minetest.colorize("#FF0000", "Desativado")
+		status = status .. minetest.colorize("#FF0000", S("Desativado"))
 	
 	-- Caso esteja no Grupo Privado
 	elseif st == "grupo" then
-		status = status .. minetest.colorize("#3366FF", "em Privado")
+		status = status .. minetest.colorize("#3366FF", S("em Privado"))
 	
 	-- Caso esteja no Grupo da Guilda
 	elseif st == "guilda" then
-		status = status .. minetest.colorize("#3366FF", "em Grupo")
+		status = status .. minetest.colorize("#3366FF", S("em Grupo"))
 	
 	-- Caso nenhuma situação prevista
 	else
-		status = status .. "Erro"
+		status = status .. S("Erro")
 	end
 	
 	-- Avisos sonoros
@@ -58,19 +60,19 @@ multichat.acessar_menu = function(name)
 	formspec = formspec
 		..default.gui_bg
 		..default.gui_bg_img
-		.."label[0,0;Meu Bate-Papo \n"..status.."]"
+		.."label[0,0;"..S("Meu Bate-Papo").."\n"..status.."]"
 		.."image[3,0;1,1;multichat_botao.png]"
-		.."checkbox[0,1;som;Som;"..st_som.."]"
-		.."checkbox[0,1.5;chamada;Chamada;"..st_chamada.."]"
-		.."button_exit[3,1.2;1,1;sair;Sair]"
-		.."button_exit[0,2.2;4,1;desativar;Desativar]"
-		.."button_exit[0,3.2;4,1;publico;Publico]"
-		.."button_exit[0,4.2;3.3,1;privado;Privado]"
+		.."checkbox[0,1;som;"..S("Som")..";"..st_som.."]"
+		.."checkbox[0,1.5;chamada;"..S("Chamada")..";"..st_chamada.."]"
+		.."button_exit[3,1.2;1,1;sair;"..S("Sair").."]"
+		.."button_exit[0,2.2;4,1;desativar;"..S("Desativar").."]"
+		.."button_exit[0,3.2;4,1;publico;"..S("Publico").."]"
+		.."button_exit[0,4.2;3.3,1;privado;"..S("Privado").."]"
 		.."image_button[3.15,4.3;0.825,0.825;default_book_written.png;grupo;]"
 	
 	-- Botão de grupo
 	if multichat.guild == true then
-		formspec = formspec .. "button_exit[0,5.2;4,1;guild;Guilda]"
+		formspec = formspec .. "button_exit[0,5.2;4,1;guild;"..S("Grupo").."]"
 	end
 	minetest.show_formspec(name, "multichat:menu", formspec)
 end
@@ -113,19 +115,19 @@ local acessar_menu_grupo = function(name)
 	minetest.show_formspec(name, "multichat:menu_grupo", "size[8,6]"
 		..default.gui_bg
 		..default.gui_bg_img
-		.."label[0,0;Meu Bate-Papo Privado]"
-		.."button[6.1,-0.1;2,1;voltar;Voltar]"
+		.."label[0,0;"..S("Meu Bate-Papo Privado").."]"
+		.."button[6.1,-0.1;2,1;voltar;"..S("Voltar").."]"
 		
-		.."label[0,1.1;Ignorados]"
+		.."label[0,1.1;"..S("Ignorados").."]"
 		.."textlist[0,1.6;3,4.5;online;"..st_online.."]"
 		
 		.."image[3.5,1.7;1,1;gui_furnace_arrow_bg.png^[transformR270]"
-		.."button[3.1,2.5;1.9,1;adicionar;Adicionar]"
+		.."button[3.1,2.5;1.9,1;adicionar;"..S("Adicionar").."]"
 		
-		.."button[3.1,4.3;1.9,1;remover;Remover]"
+		.."button[3.1,4.3;1.9,1;remover;"..S("Remover").."]"
 		.."image[3.5,5;1,1;gui_furnace_arrow_bg.png^[transformR90]"
 		
-		.."label[4.85,1.1;Conversando]"
+		.."label[4.85,1.1;"..S("Conversando").."]"
 		.."textlist[4.85,1.6;3,4.5;grupo;"..st_grupo.."]"
 	)
 end
@@ -137,15 +139,15 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		-- Botao de desativar bate-papo
 		if fields.desativar then
 			player:set_attribute("multichat_status", "off")
-			minetest.chat_send_player(player:get_player_name(), "Bate-papo desativado")
+			minetest.chat_send_player(player:get_player_name(), S("Bate-papo desativado"))
 			
 		elseif fields.publico then
 			player:set_attribute("multichat_status", "pub")
-			minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo publico")
+			minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo publico"))
 			
 		elseif fields.privado then
 			player:set_attribute("multichat_status", "grupo")
-			minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo privado")
+			minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo privado"))
 			
 		elseif fields.grupo then
 			acessar_menu_grupo(player:get_player_name())
@@ -156,10 +158,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			if multichat.mod_guild == "manipulus" then
 				local grupo = manipulus.get_player_grupo(player:get_player_name())
 				if grupo == nil or manipulus.existe_grupo(grupo) == false then
-					minetest.chat_send_player(player:get_player_name(), "Precisa entrar em um grupo")
+					minetest.chat_send_player(player:get_player_name(), S("Precisa entrar em um grupo"))
 				else
 					player:set_attribute("multichat_status", "guilda")
-					minetest.chat_send_player(player:get_player_name(), "Foste para o bate-papo do grupo '"..grupo.."'")
+					minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo do grupo @1", "'"..grupo.."'"))
 				end
 			end
 		
@@ -242,7 +244,7 @@ if mymenu then
 	mymenu.register_tr(SS)
 	
 	-- Registrar botao
-	mymenu.register_button("multichat:abrir_menu", "Bate-Papo")
+	mymenu.register_button("multichat:abrir_menu", S("Bate-Papo"))
 	
 	-- Receber botao do inventario
 	minetest.register_on_player_receive_fields(function(player, formname, fields)
@@ -253,21 +255,21 @@ if mymenu then
 	
 elseif sfinv then
 	sfinv.register_page("multichat:menu", {
-		title = "Bate-Papo",
+		title = S("Bate-Papo"),
 		get = function(self, player, context)
-			return sfinv.make_formspec(player, context, [[
-				button[2.5,1.5;3,1;multichat:abrir_menu;Abrir Menu]
-				listring[current_player;main]
-				listring[current_player;craft]
-				image[0,4.75;1,1;gui_hb_bg.png]
-				image[1,4.75;1,1;gui_hb_bg.png]
-				image[2,4.75;1,1;gui_hb_bg.png]
-				image[3,4.75;1,1;gui_hb_bg.png]
-				image[4,4.75;1,1;gui_hb_bg.png]
-				image[5,4.75;1,1;gui_hb_bg.png]
-				image[6,4.75;1,1;gui_hb_bg.png]
-				image[7,4.75;1,1;gui_hb_bg.png]
-			]], true)
+			return sfinv.make_formspec(player, context, 
+				"button[2.5,1.5;3,1;multichat:abrir_menu;"..S("Abrir Menu").."]"
+				.."listring[current_player;main]"
+				.."listring[current_player;craft]"
+				.."image[0,4.75;1,1;gui_hb_bg.png]"
+				.."image[1,4.75;1,1;gui_hb_bg.png]"
+				.."image[2,4.75;1,1;gui_hb_bg.png]"
+				.."image[3,4.75;1,1;gui_hb_bg.png]"
+				.."image[4,4.75;1,1;gui_hb_bg.png]"
+				.."image[5,4.75;1,1;gui_hb_bg.png]"
+				.."image[6,4.75;1,1;gui_hb_bg.png]"
+				.."image[7,4.75;1,1;gui_hb_bg.png]", 
+			true)
 		end
 	})
 

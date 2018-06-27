@@ -10,16 +10,19 @@
 	
   ]]
 
+local S = multichat.S
 
-minetest.register_privilege("chat_admin", "Usar char como administrador")
-minetest.register_privilege("chat_staff", "Usar char como moderador")
+minetest.register_privilege("chat_admin", S("Usar chat como administrador"))
+minetest.register_privilege("chat_staff", S("Usar chat como moderador"))
 
 -- Grupos privados de cada jogador
 multichat.grupos = {}
 
 -- Pegar prefixos
-multichat.admin_prefix = minetest.setting_get("multichat_admin_prefix") or "ADMIN"
-multichat.staff_prefix = minetest.setting_get("multichat_staff_prefix") or "MODERADOR"
+S = multichat.Sfake
+multichat.admin_prefix = minetest.setting_get("multichat_admin_prefix") or S("ADMIN")
+multichat.staff_prefix = minetest.setting_get("multichat_staff_prefix") or S("MODERADOR")
+S = multichat.S
 
 local tocar_som = function(player) minetest.sound_play("multichat_aviso", {object = player,gain = 0.5,max_hear_distance = 1}) end
 local tocar_chamada = function(player) minetest.sound_play("multichat_chamada", {object = player,gain = 0.5,max_hear_distance = 1}) end
@@ -43,8 +46,8 @@ local som_avisar = multichat.som_avisar
 
 -- Pegar prefixo
 multichat.prefixo = function(name)
-	if minetest.check_player_privs(name, {chat_admin=true}) then return "["..multichat.admin_prefix.."]" end
-	if minetest.check_player_privs(name, {chat_staff=true}) then return "["..multichat.staff_prefix.."]" end
+	if minetest.check_player_privs(name, {chat_admin=true}) then return "["..S(multichat.admin_prefix).."]" end
+	if minetest.check_player_privs(name, {chat_staff=true}) then return "["..S(multichat.staff_prefix).."]" end
 	return ""
 end
 
