@@ -141,29 +141,33 @@ multichat.s = function(...)
 	return s(...)
 end
 
--- Marcador e ajustador de strings traduziveis
-if minetest.get_translator ~= nil then
-	multichat.S = function(...)
-		local args = { ... }
-		if type(args[1]) == "table" then
-			local r = {}
-			for n,a in ipairs(args[1]) do
-				if n ~= 1 then -- Não traduz o primeiro
-					table.insert(r, multichat.S(a))
-				else
-					table.insert(r, a)
-				end
+-- Não troca string caso esteja trabalhando com intllib
+if minetest.get_modpath("intllib") ~= nil 
+	and minetest.get_translator == nil 
+then
+	multichat.s = s
+end
+
+multichat.S = function(...)
+	local args = { ... }
+	if type(args[1]) == "table" then
+		local r = {}
+		for n,a in ipairs(args[1]) do
+			if n ~= 1 then -- Não traduz o primeiro
+				table.insert(r, multichat.S(a))
+			else
+				table.insert(r, a)
 			end
-			
-			return multichat.s(unpack(r))
-			
-		elseif type(args[1]) == "string" then
-			-- Não traduz caso faltem argumentos (devido strings ilustrativas)
-			return multichat.s(...)
-			
-		else
-			return args[1]
 		end
+		
+		return multichat.s(unpack(r))
+		
+	elseif type(args[1]) == "string" then
+		-- Não traduz caso faltem argumentos (devido strings ilustrativas)
+		return multichat.s(...)
+		
+	else
+		return args[1]
 	end
 end
 

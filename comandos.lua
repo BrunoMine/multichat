@@ -10,8 +10,10 @@
 	
   ]]
 
+local S = multichat.S
+
 minetest.register_chatcommand("chat", {
-	description = "Abrir painel do bate-papo",
+	description = S("Abrir painel do bate-papo"),
 	privs = {},
 	func = function(name)
 		multichat.acessar_menu(name)

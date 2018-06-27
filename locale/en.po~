@@ -3,144 +3,137 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-27 18:57-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-06-27 11:41-0300\n"
+"PO-Revision-Date: 2018-06-27 12:19-0300\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
 
 #: menu.lua
 msgid "Atualmente"
-msgstr ""
+msgstr "Currently"
 
 #: menu.lua
 msgid "em Publico"
-msgstr ""
+msgstr "in Public"
 
 #: menu.lua
 msgid "Desativado"
-msgstr ""
+msgstr "Disabled"
 
 #: menu.lua
 msgid "em Privado"
-msgstr ""
+msgstr "in Private"
 
 #: menu.lua
 msgid "em Grupo"
-msgstr ""
+msgstr "in Group"
 
 #: menu.lua
 msgid "Erro"
-msgstr ""
+msgstr "Error"
 
 #: menu.lua
 msgid "Meu Bate-Papo"
-msgstr ""
+msgstr "My Chat"
 
 #: menu.lua
 msgid "Som"
-msgstr ""
-
-#: menu.lua
-msgid "Chamada"
-msgstr ""
+msgstr "Sound"
 
 #: menu.lua
 msgid "Sair"
-msgstr ""
+msgstr "Exit"
 
 #: menu.lua
 msgid "Desativar"
-msgstr ""
+msgstr "Disable"
 
 #: menu.lua
 msgid "Publico"
-msgstr ""
+msgstr "Public"
 
 #: menu.lua
 msgid "Privado"
-msgstr ""
+msgstr "Private"
 
 #: menu.lua
 msgid "Grupo"
-msgstr ""
+msgstr "Group"
 
 #: menu.lua
 msgid "Meu Bate-Papo Privado"
-msgstr ""
+msgstr "My Private Chat"
 
 #: menu.lua
 msgid "Voltar"
-msgstr ""
+msgstr "Return"
 
 #: menu.lua
 msgid "Ignorados"
-msgstr ""
+msgstr "Ignored"
 
 #: menu.lua
 msgid "Adicionar"
-msgstr ""
+msgstr "Add"
 
 #: menu.lua
 msgid "Remover"
-msgstr ""
+msgstr "Remove"
 
 #: menu.lua
 msgid "Conversando"
-msgstr ""
+msgstr "Speaking"
 
 #: menu.lua
 msgid "Bate-papo desativado"
-msgstr ""
+msgstr "Chat disabled"
 
 #: menu.lua
 msgid "Foste para o bate-papo publico"
-msgstr ""
+msgstr "You went to the public chat"
 
 #: menu.lua
 msgid "Foste para o bate-papo privado"
-msgstr ""
+msgstr "You went to the private chat"
 
 #: menu.lua
 msgid "Precisa entrar em um grupo"
-msgstr ""
+msgstr "You need to join a group"
 
 #: menu.lua
 msgid "Foste para o bate-papo do grupo @1"
-msgstr ""
+msgstr "You went to group chat"
 
 #: menu.lua
 msgid "Bate-Papo"
-msgstr ""
+msgstr "Chat"
 
 #: menu.lua
 msgid "Abrir Menu"
-msgstr ""
+msgstr "Open Menu"
 
 #: chat.lua
 msgid "Usar chat como administrador"
-msgstr ""
+msgstr "Use the chat how administrator"
 
 #: chat.lua
 msgid "Usar chat como moderador"
-msgstr ""
+msgstr "Use the chat how staff"
 
 #: chat.lua
 msgid "ADMIN"
-msgstr ""
+msgstr "ADMIN"
 
 #: chat.lua
 msgid "MODERADOR"
-msgstr ""
-
-#: comandos.lua
-msgid "Abrir painel do bate-papo"
-msgstr ""
+msgstr "STAFF"
