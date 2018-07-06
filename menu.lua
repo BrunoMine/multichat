@@ -225,8 +225,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			
 			-- Remove jogador do grupo
 			local sl = tonumber(multichat.online[name].sl_tb_grupo)
-			local grupo = multichat.online[name].tb_grupo[sl]
-			multichat.grupos[name][multichat.online[name].tb_grupo[sl]] = nil
+			if multichat.grupos[name] ~= nil 
+				and multichat.online[name].tb_grupo ~= nil
+				and multichat.online[name].tb_grupo[sl] ~= nil
+			then
+				multichat.grupos[name][multichat.online[name].tb_grupo[sl]] = nil
+			end
 			
 			-- Atualiza menu do grupo
 			acessar_menu_grupo(name)
