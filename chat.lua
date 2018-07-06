@@ -54,6 +54,7 @@ end
 -- Enviar mensagem para jogador
 local enviar_msg = function(name, msg, falante)
 	local player = minetest.get_player_by_name(name)
+	if player == nil then return end
 	local status = player:get_attribute("multichat_status")
 	
 	-- Verifica se o jogador está no bate-papo público
