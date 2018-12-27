@@ -2,3 +2,4 @@ default
 sfinv?
 mymenu?
 manipulus?
+sfinv_menu?

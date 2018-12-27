@@ -256,33 +256,15 @@ if mymenu then
 			multichat.acessar_menu(player:get_player_name())
 		end
 	end)
-	
-elseif sfinv then
-	sfinv.register_page("multichat:menu", {
-		title = S("Bate-Papo"),
-		get = function(self, player, context)
-			return sfinv.make_formspec(player, context, 
-				"button[2.5,1.5;3,1;multichat:abrir_menu;"..S("Abrir Menu").."]"
-				.."listring[current_player;main]"
-				.."listring[current_player;craft]"
-				.."image[0,4.75;1,1;gui_hb_bg.png]"
-				.."image[1,4.75;1,1;gui_hb_bg.png]"
-				.."image[2,4.75;1,1;gui_hb_bg.png]"
-				.."image[3,4.75;1,1;gui_hb_bg.png]"
-				.."image[4,4.75;1,1;gui_hb_bg.png]"
-				.."image[5,4.75;1,1;gui_hb_bg.png]"
-				.."image[6,4.75;1,1;gui_hb_bg.png]"
-				.."image[7,4.75;1,1;gui_hb_bg.png]", 
-			true)
-		end
-	})
 
+end
 
-	-- Receber botao do inventario
-	minetest.register_on_player_receive_fields(function(player, formname, fields)
-		if fields["multichat:abrir_menu"] then
+if sfinv_menu then
+	sfinv_menu.registrar_botao("multichat:menu", {
+		titulo = S("Bate-Papo"),
+		icon = "multichat_botao.png",
+		func = function(player)
 			multichat.acessar_menu(player:get_player_name())
-		end
-	end)
-	
+		end,
+	})
 end
