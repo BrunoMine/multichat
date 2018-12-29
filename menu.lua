@@ -260,8 +260,8 @@ if mymenu then
 end
 
 if sfinv_menu then
-	sfinv_menu.registrar_botao("multichat:menu", {
-		titulo = S("Bate-Papo"),
+	sfinv_menu.register_button("multichat:menu", {
+		title = S("Bate-Papo"),
 		icon = "multichat_botao.png",
 		func = function(player)
 			multichat.acessar_menu(player:get_player_name())
