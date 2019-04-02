@@ -4,3 +4,4 @@ sfinv?
 mymenu?
 manipulus?
 sfinv_menu?
+unified_inventory?

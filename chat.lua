@@ -171,5 +171,5 @@ end
 
 -- Verificador de jogadores offline para remover grupos
 minetest.register_on_leaveplayer(function(player)
-	multichat.grupos[player:get_player_by_name()] = nil
+	multichat.grupos[player:get_player_name()] = nil
 end)
