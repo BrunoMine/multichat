@@ -170,21 +170,6 @@ else
 end
 
 -- Verificador de jogadores offline para remover grupos
-local timer = 0
-local tlim = tonumber(minetest.setting_get("multichat_tempo_verif_grupo") or 3600)
-minetest.register_globalstep(function(dtime)
-	timer = timer + dtime;
-	if timer >= 3600 then
-		-- Mantar apenas grupos de jogadores online
-		local onlines = {}
-		-- Mudar tabela
-		for _,player in ipairs(minetest.get_connected_players()) do
-			onlines[player:get_player_name()] = true
-		end
-		for name,i in pairs(multichat.grupos) do
-			if not onlines[name] then
-				multichat.grupos[name] = nil
-			end
-		end
-	end
+minetest.register_on_leaveplayer(function(player)
+	multichat.grupos[player:get_player_by_name()] = nil
 end)
