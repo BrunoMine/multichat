@@ -65,9 +65,9 @@ multichat.acessar_menu = function(name)
 		.."checkbox[0,1;som;"..S("Som")..";"..st_som.."]"
 		.."checkbox[0,1.5;chamada;"..S("Chamada")..";"..st_chamada.."]"
 		.."button_exit[3,1.2;1,1;sair;"..S("Sair").."]"
-		.."button_exit[0,2.2;4,1;desativar;"..S("Desativar").."]"
-		.."button_exit[0,3.2;4,1;publico;"..S("Publico").."]"
-		.."button_exit[0,4.2;3.3,1;privado;"..S("Privado").."]"
+		.."button[0,2.2;4,1;desativar;"..S("Desativar").."]"
+		.."button[0,3.2;4,1;publico;"..S("Publico").."]"
+		.."button[0,4.2;3.3,1;privado;"..S("Privado").."]"
 		.."image_button[3.15,4.3;0.825,0.825;default_book_written.png;grupo;]"
 
 	-- Botão de grupo
@@ -135,33 +135,37 @@ end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 	if formname == "multichat:menu" then
+		local name = player:get_player_name()
 
 		-- Botao de desativar bate-papo
 		if fields.desativar then
 			player:set_attribute("multichat_status", "off")
-			minetest.chat_send_player(player:get_player_name(), S("Bate-papo desativado"))
+			minetest.chat_send_player(name, S("Bate-papo desativado"))
+			multichat.acessar_menu(name)
 
 		elseif fields.publico then
 			player:set_attribute("multichat_status", "pub")
-			minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo publico"))
+			minetest.chat_send_player(name, S("Foste para o bate-papo publico"))
+			multichat.acessar_menu(name)
 
 		elseif fields.privado then
 			player:set_attribute("multichat_status", "grupo")
 			minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo privado"))
+			multichat.acessar_menu(name)
 
 		elseif fields.grupo then
-			acessar_menu_grupo(player:get_player_name())
+			acessar_menu_grupo(name)
 
 		-- Guilda
 		elseif fields.guild then
 			-- Manipulus
 			if multichat.mod_guild == "manipulus" then
-				local grupo = manipulus.get_player_grupo(player:get_player_name())
+				local grupo = manipulus.get_player_grupo(name)
 				if grupo == nil or manipulus.existe_grupo(grupo) == false then
-					minetest.chat_send_player(player:get_player_name(), S("Precisa entrar em um grupo"))
+					minetest.chat_send_player(name, S("Precisa entrar em um grupo"))
 				else
 					player:set_attribute("multichat_status", "guilda")
-					minetest.chat_send_player(player:get_player_name(), S("Foste para o bate-papo do grupo @1", "'"..grupo.."'"))
+					minetest.chat_send_player(name, S("Foste para o bate-papo do grupo @1", "'"..grupo.."'"))
 				end
 			end
 
