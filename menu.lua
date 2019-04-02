@@ -263,11 +263,22 @@ if mymenu then
 
 end
 
-if sfinv_menu then
+if minetest.global_exists("sfinv_menu") then
 	sfinv_menu.register_button("multichat:menu", {
 		title = S("Bate-Papo"),
 		icon = "multichat_botao.png",
 		func = function(player)
+			multichat.acessar_menu(player:get_player_name())
+		end,
+	})
+end
+
+if minetest.global_exists("unified_inventory") then
+	unified_inventory.register_button("multichat:menu", {
+		type = "image",
+		image = "multichat_botao.png",
+		tooltip = S("Bate-Papo"),
+		action = function(player)
 			multichat.acessar_menu(player:get_player_name())
 		end,
 	})
