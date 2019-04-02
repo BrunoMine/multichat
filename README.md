@@ -25,8 +25,8 @@ Adiciona funcionalidades ao bate-papo
 
 ## Privilégios _(Privileges)_
 
-* `chat_admin` : Adiciona prefixo de adminstrador (`[ADMIN]`, configurável) nas falas no bate-papo 
-* `chat_staff` : Adiciona prefixo de moderador (`[MODERADOR]`, configurável) nas falas no bate-papo 
+* `chat_admin` : Adiciona prefixo de adminstrador (`[ADMIN]`, configurável) nas falas no bate-papo
+* `chat_staff` : Adiciona prefixo de moderador (`[MODERADOR]`, configurável) nas falas no bate-papo
 
 ## Licença
 Veja LICENSE.txt para informações detalhadas da licença LGPL 3.0
@@ -43,6 +43,3 @@ Desconhecido (CC0)
 
 UnderlinedDesigns (CC0)
 	multichat_chamada.ogg
- 
-
-

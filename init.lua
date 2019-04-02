@@ -1,11 +1,11 @@
 --[[
 	Mod MultiChat para Minetest
 	Copyright (C) 2017 BrunoMine (https://github.com/BrunoMine)
-	
+
 	Recebeste uma cópia da GNU Lesser General
 	Public License junto com esse software,
-	se não, veja em <http://www.gnu.org/licenses/>. 
-	
+	se não, veja em <http://www.gnu.org/licenses/>.
+
   ]]
 
 
@@ -27,7 +27,7 @@ end
 
 -- Verifica se tem mod de grupo/guilda
 multichat.guild = false
-if minetest.get_modpath("manipulus") then 
+if minetest.get_modpath("manipulus") then
 	multichat.guild = true
 	multichat.mod_guild = "manipulus"
 end
