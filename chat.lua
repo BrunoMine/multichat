@@ -96,8 +96,11 @@ local enviar_msg = function(name, msg, falante)
 end
 
 -- Chamada para envio de mensagens de jogadores
-minetest.register_on_chat_message(function(name, msg)
+local function on_chat_message(name, msg)
 	-- Verifica se tem privilegio para falar
+	if msg:sub(1, 1) == "/" or not minetest.get_player_by_name(name) then
+		return
+	end
 	if not minetest.check_player_privs(name, {shout=true}) then return true end
 
 	local player = minetest.get_player_by_name(name)
@@ -112,7 +115,7 @@ minetest.register_on_chat_message(function(name, msg)
 		end
 
 		if minetest.get_modpath("irc") then
-			irc.say("<"..multichat.prefixo(name)..name.."> "..msg)
+			irc.say("<" .. name.. "> " .. msg)
 		end
 
 	-- Verificar se está desativado
@@ -154,8 +157,17 @@ minetest.register_on_chat_message(function(name, msg)
 		som_avisar(name)
 	end
 	return true
-end)
+end
 
+if minetest.get_modpath("irc") then
+	table.insert(minetest.registered_on_chat_messages, 2, on_chat_message)
+	minetest.callback_origins[on_chat_message] = {
+		mod  = "multichat",
+		name = "on_chat_message"
+	}
+else
+	minetest.register_on_chat_message(on_chat_message)
+end
 
 -- Verificador de jogadores offline para remover grupos
 local timer = 0
