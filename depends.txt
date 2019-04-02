@@ -1,4 +1,5 @@
 default
+irc?
 sfinv?
 mymenu?
 manipulus?
