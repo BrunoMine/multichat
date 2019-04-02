@@ -5,12 +5,3 @@ multichat_admin_prefix (Prefixo usado para administradores no chat) string ADMIN
 
 # Aparece para jogadores com o provilegio chat_staff.
 multichat_staff_prefix (Prefixo usado para moderadores no chat) string MODERADOR
-
-# A cada certo tempo todos os dados de bate-papo privado 
-# de jogadores que estejam offline sao removidos para manter a memoria 
-# limpa.
-# Tempo dado em segundos.
-multichat_tempo_verif_grupo (Tempo para verificar grupos) int 3600
-
-
-
